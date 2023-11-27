@@ -6,7 +6,7 @@
 /*   By: mapfenni <mapfenni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:45:58 by mapfenni          #+#    #+#             */
-/*   Updated: 2023/09/11 23:10:22 by mapfenni         ###   ########.fr       */
+/*   Updated: 2023/11/27 18:32:40 by mapfenni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@ void	do_dup2(int fd, int replaced)
 {
 	if (dup2(fd, replaced) == -1)
 		exit_msg("dup2 failed", NULL, NULL);
-}
-
-void	make_pipe(int pipefd[2])
-{
-	if (pipe(pipefd) == -1)
-		exit_msg("Pipe creation failed", NULL, NULL);
 }
 
 pid_t	do_fork(void)
@@ -40,7 +34,7 @@ int	do_open(char *str, int oflag)
 
 	fd = open(str, oflag);
 	if (fd == -1)
-		exit_msg("Failed to open file", str, NULL);
+		exit_msg("Failed to open file : ", str, NULL);
 	return (fd);
 }
 

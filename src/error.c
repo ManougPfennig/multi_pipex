@@ -6,7 +6,7 @@
 /*   By: mapfenni <mapfenni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:30:12 by mapfenni          #+#    #+#             */
-/*   Updated: 2023/09/11 16:22:24 by mapfenni         ###   ########.fr       */
+/*   Updated: 2023/11/26 21:01:53 by mapfenni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_free_tab(char **tab, char *str)
 void	exit_msg(char *str, char *str2, char **to_free)
 {
 	ft_free_tab(to_free, NULL);
-	ft_printf("Error : %s", str);
+	ft_printf("%s", str);
 	if (str2)
 		ft_printf("%s", str2);
 	ft_printf("\n");
