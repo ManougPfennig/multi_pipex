@@ -6,15 +6,15 @@
 /*   By: mapfenni <mapfenni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:45:58 by mapfenni          #+#    #+#             */
-/*   Updated: 2023/11/27 18:32:40 by mapfenni         ###   ########.fr       */
+/*   Updated: 2023/11/28 18:11:53 by mapfenni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	do_dup2(int fd, int replaced)
+void	do_dup2(int newfd, int replaced)
 {
-	if (dup2(fd, replaced) == -1)
+	if (dup2(newfd, replaced) == -1)
 		exit_msg("dup2 failed", NULL, NULL);
 }
 
@@ -51,4 +51,11 @@ void	check_execve(char **arg, t_fd *fd)
 		do_dup2(fd->saved[1], STDOUT_FILENO);
 		exit(EXIT_FAILURE);
 	}
+}
+
+void	print_error(char *str, t_fd *fd)
+{
+	do_dup2(fd->saved[1], STDOUT_FILENO);
+	printf("%s", str);
+	do_dup2(fd->out_fd, STDOUT_FILENO);
 }

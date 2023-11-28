@@ -6,7 +6,7 @@
 /*   By: mapfenni <mapfenni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 15:11:44 by mapfenni          #+#    #+#             */
-/*   Updated: 2023/11/27 18:48:45 by mapfenni         ###   ########.fr       */
+/*   Updated: 2023/11/28 18:11:45 by mapfenni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,20 @@ void	check_execution(char **arg, t_fd *fd)
 	ft_free_tab(arg, fd->test);
 }
 
-void	print_error(char *str, t_fd *fd)
-{
-	do_dup2(fd->saved[1], STDOUT_FILENO);
-	printf("%s", str);
-	do_dup2(fd->out_fd, STDOUT_FILENO);
-}
-
 void	change_pipe(t_fd *fd, int pip[2], int i, int ac)
 {
+	int	backup[2];
+
+	pipe(backup);
 	if (i == 2)
 	{
 		fd->in_fd = fd->infile;
+		if (fd->no_input)
+		{
+			fd->in_fd = dup(backup[0]);
+			close(backup[1]);
+			close(backup[0]);
+		}
 		fd->out_fd = pip[1];
 	}
 	else if (i == ac - 2)

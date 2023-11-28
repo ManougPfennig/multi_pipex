@@ -6,14 +6,14 @@
 #    By: mapfenni <mapfenni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/07 13:49:45 by mapfenni          #+#    #+#              #
-#    Updated: 2023/11/27 12:55:54 by mapfenni         ###   ########.fr        #
+#    Updated: 2023/11/28 17:26:11 by mapfenni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 
 SRCS = ./main.c ./src/parsing.c ./src/error.c \
-./src/pipex_utils.c ./src/second_pipex.c ./src/multipipex.c
+./src/pipex_utils.c ./src/multipipex.c
 
 OBJS = ${SRCS:.c=.o}
 
