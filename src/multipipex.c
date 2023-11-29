@@ -6,7 +6,7 @@
 /*   By: mapfenni <mapfenni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 15:11:44 by mapfenni          #+#    #+#             */
-/*   Updated: 2023/11/28 18:11:45 by mapfenni         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:01:48 by mapfenni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	change_pipe(t_fd *fd, int pip[2], int i, int ac)
 	int	backup[2];
 
 	pipe(backup);
-	if (i == 2)
+	if (i == 1)
 	{
 		fd->in_fd = fd->infile;
 		if (fd->no_input)
@@ -54,16 +54,15 @@ void	change_pipe(t_fd *fd, int pip[2], int i, int ac)
 			close(backup[0]);
 		}
 		fd->out_fd = pip[1];
-	}
-	else if (i == ac - 2)
-	{
-		fd->in_fd = fd->copy;
-		fd->out_fd = fd->outfile;
+		if (ac == 3)
+			fd->out_fd = fd->outfile;
 	}
 	else
 	{
 		fd->in_fd = fd->copy;
 		fd->out_fd = pip[1];
+		if (i == ac - 2)
+			fd->out_fd = fd->outfile;
 	}
 }
 
@@ -92,7 +91,7 @@ void	multipipex(char **av, t_fd *fd, int ac)
 	char	**arg;
 	int		i;
 
-	i = 1;
+	i = 0;
 	while (++i != ac - 1)
 	{
 		arg = ft_split(av[i], ' ');

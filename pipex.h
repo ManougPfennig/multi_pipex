@@ -6,7 +6,7 @@
 /*   By: mapfenni <mapfenni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:24:47 by mapfenni          #+#    #+#             */
-/*   Updated: 2023/11/28 18:00:47 by mapfenni         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:51:43 by mapfenni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	parsing(char **av, t_fd *fd);
 void	exit_msg(char *str, char *str2, char **to_free);
 void	pipex(char **av, t_fd *fd);
 void	second_pipex(t_fd *fd, char **av);
-int		check_commands(char *av, t_fd *fd);
 void	check_execve(char **arg, t_fd *fd);
 void	do_dup2(int newfd, int replaced);
 pid_t	do_fork(void);

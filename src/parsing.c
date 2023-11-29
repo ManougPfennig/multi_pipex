@@ -6,7 +6,7 @@
 /*   By: mapfenni <mapfenni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:28:23 by mapfenni          #+#    #+#             */
-/*   Updated: 2023/11/28 17:37:31 by mapfenni         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:52:17 by mapfenni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ void	check_files(char **av, t_fd *fd)
 {
 	int	temp;
 
-	temp = open(av[1], O_RDONLY);
-	if (access(av[1], F_OK) != 0)
+	temp = open(av[0], O_RDONLY);
+	if (access(av[0], F_OK) != 0)
 	{
-		ft_printf("Input file does not exist: %s\n", av[1]);
+		ft_printf("Input file does not exist: %s\n", av[0]);
 		fd->no_input = 1;
 	}
 	else if (temp == -1)
 	{
-		ft_printf("Permission denied: %s\n", av[1]);
+		ft_printf("Permission denied: %s\n", av[0]);
 		fd->no_input = 1;
 	}
 	close(temp);
@@ -42,34 +42,6 @@ void	check_files(char **av, t_fd *fd)
 	if (temp == -1)
 		exit_msg("Permission denied: ", ft_lastav(av), NULL);
 	close(temp);
-}
-
-int	check_commands(char *av, t_fd *fd)
-{
-	int		i;
-	int		check;
-	char	*path;
-	char	**arg;
-
-	i = 0;
-	check = 0;
-	path = NULL;
-	arg = ft_split(av, ' ');
-	if (access(arg[0], F_OK) == 0)
-		check++;
-	while (fd->path[i])
-	{
-		path = ft_strjoin(fd->path[i], arg[0]);
-		if (access(path, F_OK) == 0)
-			check++;
-		i++;
-		ft_free_tab(NULL, path);
-		path = NULL;
-	}
-	ft_free_tab(arg, path);
-	if (check)
-		return (1);
-	return (0);
 }
 
 void	parsing(char **av, t_fd *fd)
