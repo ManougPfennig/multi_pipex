@@ -6,7 +6,7 @@
 /*   By: mapfenni <mapfenni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 17:24:47 by mapfenni          #+#    #+#             */
-/*   Updated: 2023/11/29 14:51:43 by mapfenni         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:25:41 by mapfenni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ pid_t	do_fork(void);
 int		do_open(char *str, int oflag);
 void	ft_free_tab(char **tab, char *str);
 char	*ft_lastav(char **av);
-void	multipipex(char **av, t_fd *fd, int ac);
+void	main_start(int ac, t_fd *fd, char **av);
+void	multipipex(char **av, int ac);
 int		loop_test(char **arg, t_fd *fd);
 void	print_error(char *str, t_fd *fd);
 

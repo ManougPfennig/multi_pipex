@@ -6,7 +6,7 @@
 /*   By: mapfenni <mapfenni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:28:23 by mapfenni          #+#    #+#             */
-/*   Updated: 2023/11/29 14:52:17 by mapfenni         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:27:53 by mapfenni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,25 @@ void	parsing(char **av, t_fd *fd)
 	check_files(av, fd);
 	fd->path = ft_split("/usr/local/sbin/:/usr/local/bin/:/usr/sbin/:/usr/bin/:\
 	/sbin/:/bin/:/usr/games/:/usr/local/games/:/snap/bin/:/snap/bin/", ':');
+}
+
+void	main_start(int ac, t_fd *fd, char **av)
+{
+	int	temp;
+
+	temp = -1;
+	if (ac < 3)
+		exit_msg("Unvalid amount of arguments", NULL, NULL);
+	if (access(ft_lastav(av), F_OK) != 0 && ft_strlen(ft_lastav(av)) > 0)
+		temp = open(ft_lastav(av), O_CREAT, 0666);
+	else if (access(ft_lastav(av), F_OK) != 0)
+		exit_msg("Invalid output name", NULL, NULL);
+	if (temp != -1)
+		close(temp);
+	fd->saved[0] = dup(STDIN_FILENO);
+	fd->saved[1] = dup(STDOUT_FILENO);
+	parsing(av, fd);
+	fd->infile = open(av[0], O_RDONLY);
+	fd->outfile = do_open(ft_lastav(av), O_WRONLY);
+	fd->test = NULL;
 }

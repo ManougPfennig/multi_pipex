@@ -6,7 +6,7 @@
 /*   By: mapfenni <mapfenni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 15:11:44 by mapfenni          #+#    #+#             */
-/*   Updated: 2023/11/29 15:01:48 by mapfenni         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:25:14 by mapfenni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,16 @@ void	exec_command(char **arg, t_fd *fd, int i, int ac)
 	close(pip[1]);
 }
 
-void	multipipex(char **av, t_fd *fd, int ac)
+void	multipipex(char **av, int ac)
 {
 	char	**arg;
 	int		i;
+	t_fd	*fd;
+	t_fd	data;
 
+	fd = &data;
 	i = 0;
+	main_start(ac, fd, av);
 	while (++i != ac - 1)
 	{
 		arg = ft_split(av[i], ' ');
@@ -103,4 +107,5 @@ void	multipipex(char **av, t_fd *fd, int ac)
 			check_execution(arg, fd);
 		}
 	}
+	ft_free_tab(fd->path, NULL);
 }
